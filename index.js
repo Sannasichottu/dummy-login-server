@@ -4,10 +4,13 @@ const mongoose = require('mongoose')
 require ('dotenv').config();
 const userSchema = require('./router/userRouter');
 const morgan = require('morgan');
+const cors = require('cors')
+
 
 //Middleware
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors())
 
 
 //mongoose connection
@@ -25,7 +28,6 @@ connection.once('open',()=>{
 
 //Router
 app.use('/user',userSchema);
-
 
 
 /*
