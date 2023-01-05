@@ -110,11 +110,11 @@ router.post('/send-otp', async (req,res) => {
             to: req.body.email, // list of receivers
             subject: "OTP", // Subject line
             text: String(_otp),
-            html: `<html>
-                < body >
-                Hello and welcome
-            </ >
-           </html > `,
+             html: `<html>
+                 < body >
+                 Hello and welcome
+                 </ >
+                </html > `
         })
 
         if (info.messageId) {
@@ -160,6 +160,7 @@ router.post('/submit-otp',(req,res) => {
 
     })
 })
+
 
 
 module.exports = router;
