@@ -35,6 +35,6 @@ app.use('/',(req,res) => {
     res.send("Hlo")
 })*/
 
-app.listen(3001, () => {
+app.listen(3002, () => {
     console.log(`server is running`);
 })
