@@ -24,7 +24,7 @@ router.post('/register',async(req,res) => {
     } catch (err) {
         res.status(400).json(err);
     }
-    res.json(user);
+    //res.json(user);
 });
 
 //Login
@@ -120,7 +120,7 @@ router.post('/send-otp', async (req,res) => {
         if (info.messageId) {
 
             console.log(info, 84)
-            UserModel.updateOne({ email: req.body.email }, { otp: _otp })
+            User.updateOne({ email: req.body.email }, { otp: _otp })
                 .then(result => {
                     res.send({ code: 200, message: 'otp send' })
                 })
@@ -139,9 +139,11 @@ router.post('/send-otp', async (req,res) => {
 router.post('/submit-otp',(req,res) => {
     console.log(req.body);
 
-    UserModel.findOne({ otp: req.body.otp }).then(result => {
+    User.findOne({ otp: req.body.otp }).then(result => {
 
         //  update the password
+
+
 
         User.updateOne({ email: result.email }, { password: req.body.password })
             .then(result => {

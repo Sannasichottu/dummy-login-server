@@ -4,14 +4,16 @@ const mongoose = require('mongoose')
 require ('dotenv').config();
 const userSchema = require('./router/userRouter');
 const morgan = require('morgan');
-const cors = require('cors')
+var cors = require('cors');
+
 
 
 //Middleware
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors())
+app.use(cors());
 
+const port = process.env.PORT || 5000
 
 //mongoose connection
 const uri = process.env.ATLAS_URI
@@ -35,6 +37,6 @@ app.use('/',(req,res) => {
     res.send("Hlo")
 })*/
 
-app.listen(3002, () => {
+app.listen(port, () => {
     console.log(`server is running`);
 })

@@ -20,8 +20,7 @@ const UserSchema = new mongoose.Schema({
     },
     otp:{
         type:Number,
-        required:true
-    }
+     }
 
 })
 
