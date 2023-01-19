@@ -99,7 +99,7 @@ router.post('/send-otp', async (req,res) => {
             secure: false,
             auth: {
                 user: testAccount.user,
-                pass: testAccount.pass
+                pass: testAccount.pass,
             }
         })
 
@@ -110,11 +110,15 @@ router.post('/send-otp', async (req,res) => {
             to: req.body.email, // list of receivers
             subject: "OTP", // Subject line
             text: String(_otp),
-             html: `<html>
-                 < body >
-                 Hello and welcome
-                 </ >
-                </html > `
+             html:
+             `
+                         <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+                         <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the chottu.</h2>
+                         <p>Congratulations! You're almost set to start using CHOTTU.
+                             Your otp num .
+                         </p>
+                         </div>
+                         `
         })
 
         if (info.messageId) {
@@ -140,24 +144,16 @@ router.post('/submit-otp',(req,res) => {
     console.log(req.body);
 
     User.findOne({ otp: req.body.otp }).then(result => {
-
         //  update the password
-
-
-
         User.updateOne({ email: result.email }, { password: req.body.password })
             .then(result => {
                 res.send({ code: 200, message: 'Password updated' })
             })
             .catch(err => {
                 res.send({ code: 500, message: 'Server err' })
-
             })
-
-
     }).catch(err => {
         res.send({ code: 500, message: 'otp is wrong' })
-
     })
 })
 
